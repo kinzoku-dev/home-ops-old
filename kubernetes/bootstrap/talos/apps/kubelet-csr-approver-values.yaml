@@ -1,0 +1,3 @@
+---
+providerRegex: ^(orion-01|aries-01|aries-02)$
+bypassDnsResolution: true
