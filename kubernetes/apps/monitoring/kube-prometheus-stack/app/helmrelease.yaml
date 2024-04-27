@@ -1,0 +1,142 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+spec:
+  interval: 30m
+  timeout: 15m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 58.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      strategy: rollback
+      retries: 3
+  dependsOn:
+    - name: openebs
+      namespace: openebs-system
+  values:
+    crds:
+      enabled: true
+    fullnameOverride: prometheus
+    alertmanager:
+      fullnameOverride: alertmanager
+      enabled: true
+      ingress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: internal
+        hosts: ["alertmanager.the-nebula.xyz"]
+      alertmanagerSpec:
+        replicas: 1
+        useExistingSecret: false
+        storage:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: openebs-hostpath
+            resources:
+              requests:
+                storage: 1Gi
+    grafana:
+      enabled: true
+      fullnameOverride: grafana
+      forceDeployDatasources: false
+      forceDeployDashboards: false
+      defaultDashboardsEnabled: true
+      defaultDashboardsTimezone: utc
+      serviceMonitor:
+        enabled: true
+      admin:
+        existingSecret: prometheus-secrets
+        userKey: GRAFANA_ADMIN_USER
+        passwordKey: GRAFANA_ADMIN_PASSWORD
+    kubeApiServer:
+      enabled: true
+    kubelet:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - action: replace
+            sourceLabels:
+              - node
+            targetLabel: instance
+    kubeControllerManager:
+      enabled: true
+      endpoints: &serverIPs
+        - 192.168.3.21
+    kubeScheduler:
+      enabled: true
+      endpoints: *serverIPs
+    kubeProxy:
+      enabled: true
+      endpoints: *serverIPs
+    kube-state-metrics:
+      fullnameOverride: kube-state-metrics
+      selfMonitor:
+        enabled: true
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings: &podNameRelabel
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
+    prometheus-node-exporter:
+      fullnameOverride: node-exporter
+      podLabels:
+        jobLabel: node-exporter
+      service:
+        portName: http-metrics
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings: *podNameRelabel
+      resources:
+        requests:
+          memory: 512Mi
+          cpu: 250m
+        limits:
+          memory: 2048Mi
+    prometheusOperator:
+      enabled: true
+      prometheusConfigReloader:
+        resources:
+          cpu: 200m
+          memory: 50Mi
+        limits:
+          memory: 100Mi
+    prometheus:
+      enabled: true
+      prometheusSpec:
+        replicas: 1
+        replicaExternalLabelName: "replica"
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        retention: 6h
+        enableAdminAPI: true
+        walCompression: true
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: openebs-hostpath
+              resources:
+                requests:
+                  storage: 20Gi
