@@ -21,7 +21,7 @@ spec:
     remediation:
       retries: 3
   values:
-    providerRegex: ^(orion-01|aries-01|aries-02)$
+    providerRegex: ^(orion-01|orion-02|orion-03)$
     bypassDnsResolution: true
     metrics:
       enable: true
