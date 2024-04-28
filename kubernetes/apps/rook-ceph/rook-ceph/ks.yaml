@@ -6,11 +6,11 @@ metadata:
   name: &app rook-ceph
   namespace: flux-system
 spec:
-  targetNamespace: storage
+  targetNamespace: rook-ceph
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/storage/rook-ceph/app
+  path: ./kubernetes/apps/rook-ceph/rook-ceph/app
   prune: false
   sourceRef:
     kind: GitRepository
@@ -27,11 +27,11 @@ metadata:
   name: &app rook-ceph-cluster
   namespace: flux-system
 spec:
-  targetNamespace: storage
+  targetNamespace: rook-ceph
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/storage/rook-ceph/cluster
+  path: ./kubernetes/apps/rook-ceph/rook-ceph/cluster
   prune: false
   sourceRef:
     kind: GitRepository
