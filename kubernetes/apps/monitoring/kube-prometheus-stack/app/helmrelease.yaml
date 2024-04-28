@@ -63,6 +63,14 @@ spec:
         existingSecret: prometheus-secrets
         userKey: GRAFANA_ADMIN_USER
         passwordKey: GRAFANA_ADMIN_PASSWORD
+      ingress:
+        enabled: true
+        ingressClassName: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: external.the-nebula.xyz
+        hosts:
+          - grafana.the-nebula.xyz
+        path: /
     kubeApiServer:
       enabled: true
     kubelet:
