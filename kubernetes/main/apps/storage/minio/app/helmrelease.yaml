@@ -113,6 +113,6 @@ spec:
       config:
         type: nfs
         server: 192.168.3.5
-        path: /mnt/storage/nfs_k8s_minio
+        path: /eros/Apps/MinIO
         globalMounts:
           - path: /data
