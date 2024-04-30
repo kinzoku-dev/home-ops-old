@@ -16,3 +16,4 @@ resources:
   - ./external-secrets.yaml
   - ./prometheus-community.yaml
   - ./rook-ceph.yaml
+  - ./cloudnative-pg.yaml
