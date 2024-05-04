@@ -13,7 +13,3 @@ resources:
   - ./postfinance.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./external-secrets.yaml
-  - ./prometheus-community.yaml
-  - ./rook-ceph.yaml
-  - ./cloudnative-pg.yaml
