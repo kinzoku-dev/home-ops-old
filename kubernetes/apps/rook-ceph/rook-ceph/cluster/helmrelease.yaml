@@ -62,6 +62,8 @@ spec:
       storage:
         useAllNodes: true
         useAllDevices: true
+        config:
+          osdsPerDevice: "1"
       placement:
         mgr: &placement
           nodeAffinity:
@@ -150,7 +152,7 @@ spec:
           metadataPool:
             failureDomain: host
             replicated:
-              size: 2
+              size: 3
           dataPool:
             failureDomain: host
             erasureCoded:
@@ -158,9 +160,8 @@ spec:
               codingChunks: 1
           preservePoolsOnDelete: true
           gateway:
-            port: 8080
-            instances: 2
-            priorityClassName: system-cluster-critical
+            port: 80
+            instances: 1
           healthCheck:
             bucket:
               interval: 60s
