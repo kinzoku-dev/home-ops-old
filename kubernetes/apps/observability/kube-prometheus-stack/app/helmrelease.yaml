@@ -194,21 +194,21 @@ spec:
               resources:
                 requests:
                   storage: 20Gi
-        thanos:
-          image: "quay.io/thanos/thanos:${THANOS_VERSION}"
-          version: "${THANOS_VERSION#v}"
-          objectStorageConfig:
-            existingSecret:
-              name: *secret
-              key: config
-      thanosService:
-        enabled: true
-      thanosServiceExternal:
-        enabled: true
-        type: LoadBalancer
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: thanos.the-nebula.xyz
-          io.cilium/lb-ipam-ips: 192.168.3.108
-        externalTrafficPolicy: Cluster
-      thanosServiceMonitor:
-        enabled: true
+      #   thanos:
+      #     image: "quay.io/thanos/thanos:${THANOS_VERSION}"
+      #     version: "${THANOS_VERSION#v}"
+      #     objectStorageConfig:
+      #       existingSecret:
+      #         name: *secret
+      #         key: config
+      # thanosService:
+      #   enabled: true
+      # thanosServiceExternal:
+      #   enabled: true
+      #   type: LoadBalancer
+      #   annotations:
+      #     external-dns.alpha.kubernetes.io/hostname: thanos.the-nebula.xyz
+      #     io.cilium/lb-ipam-ips: 192.168.3.108
+      #   externalTrafficPolicy: Cluster
+      # thanosServiceMonitor:
+      #   enabled: true
