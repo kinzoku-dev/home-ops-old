@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
@@ -14,10 +13,3 @@ resources:
   - ./postfinance.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./external-secrets.yaml
-  - ./prometheus-community.yaml
-  - ./rook-ceph.yaml
-  - ./cloudnative-pg.yaml
-  - ./stevehipwell.yaml
-  - ./csi-driver-nfs.yaml
-  - ./nextcloud.yaml

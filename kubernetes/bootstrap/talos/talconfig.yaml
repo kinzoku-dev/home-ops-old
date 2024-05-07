@@ -21,12 +21,12 @@ cniConfig:
 nodes:
   - hostname: "orion-01"
     ipAddress: "192.168.3.21"
-    installDisk: "/dev/sda"
+    installDisk: "/dev/nvme0n1"
     talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "bc:24:11:3c:cd:46"
+          hardwareAddr: "ec:b1:d7:72:2c:63"
         dhcp: false
         addresses:
           - "192.168.3.21/17"
@@ -38,12 +38,12 @@ nodes:
           ip: "192.168.3.20"
   - hostname: "orion-02"
     ipAddress: "192.168.3.22"
-    installDisk: "/dev/sda"
+    installDisk: "/dev/nvme0n1"
     talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
-    controlPlane: false
+    controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "bc:24:11:51:6d:4c"
+          hardwareAddr: "ec:b1:d7:72:2c:1b"
         dhcp: false
         addresses:
           - "192.168.3.22/17"
@@ -51,14 +51,16 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.1.0"
+        vip:
+          ip: "192.168.3.20"
   - hostname: "orion-03"
     ipAddress: "192.168.3.23"
-    installDisk: "/dev/sda"
+    installDisk: "/dev/nvme0n1"
     talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
-    controlPlane: false
+    controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "bc:24:11:bd:c5:35"
+          hardwareAddr: "ec:b1:d7:6f:11:ae"
         dhcp: false
         addresses:
           - "192.168.3.23/17"
@@ -66,6 +68,8 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.1.0"
+        vip:
+          ip: "192.168.3.20"
 
 patches:
   # Configure containerd
