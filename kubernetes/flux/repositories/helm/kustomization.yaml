@@ -19,3 +19,5 @@ resources:
   - ./rook-ceph.yaml
   - ./cloudnative-pg.yaml
   - ./stevehipwell.yaml
+  - ./csi-driver-nfs.yaml
+  - ./nextcloud.yaml
