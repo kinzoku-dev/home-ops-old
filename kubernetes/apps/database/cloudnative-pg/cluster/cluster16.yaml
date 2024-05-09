@@ -21,11 +21,6 @@ spec:
   nodeMaintenanceWindow:
     inProgress: false
     reusePVC: true
-  resources:
-    requests:
-      cpu: 50m
-    limits:
-      memory: 512Gi
   monitoring:
     enablePodMonitor: true
     # Ref: https://github.com/cloudnative-pg/cloudnative-pg/issues/2501
