@@ -4,3 +4,6 @@ cluster0-aries-02.yaml
 talosconfig
 cluster0-orion-02.yaml
 cluster0-orion-03.yaml
+main-orion-01.yaml
+main-orion-02.yaml
+main-orion-03.yaml

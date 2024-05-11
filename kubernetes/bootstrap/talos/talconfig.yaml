@@ -5,7 +5,7 @@ talosVersion: v1.7.0
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.30.0
 
-clusterName: &cluster cluster0
+clusterName: &cluster main
 endpoint: https://192.168.3.20:6443
 clusterPodNets:
   - "10.69.0.0/16"
@@ -26,7 +26,7 @@ nodes:
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "ec:b1:d7:72:2c:63"
+          hardwareAddr: "ec:b1:d7:72:2c:1b"
         dhcp: false
         addresses:
           - "192.168.3.21/17"
@@ -43,7 +43,7 @@ nodes:
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "ec:b1:d7:72:2c:1b"
+          hardwareAddr: "ec:b1:d7:6f:11:ae"
         dhcp: false
         addresses:
           - "192.168.3.22/17"
@@ -60,7 +60,7 @@ nodes:
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "ec:b1:d7:6f:11:ae"
+          hardwareAddr: "ec:b1:d7:72:2c:63"
         dhcp: false
         addresses:
           - "192.168.3.23/17"
