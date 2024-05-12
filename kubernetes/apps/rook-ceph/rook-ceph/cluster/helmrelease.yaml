@@ -50,7 +50,6 @@ spec:
         enabled: true
         urlPrefix: /
         ssl: false
-        prometheusEndpoint: http://prometheus-prometheus.observability.svc.cluster.local:9090
       mgr:
         modules:
           - name: pg_autoscaler
@@ -62,6 +61,7 @@ spec:
       storage:
         useAllNodes: true
         useAllDevices: true
+        deviceFilter: nvme0n1
         config:
           osdsPerDevice: "1"
       placement:
@@ -73,6 +73,31 @@ spec:
                     - key: node-role.kubernetes.io/control-plane
                       operator: Exists
         mon: *placement
+      resources:
+        mgr:
+          requests:
+            cpu: 50m
+            memory: 256Mi
+          limits:
+            memory: 1Gi
+        mon:
+          requests:
+            cpu: 50m
+            memory: 256Mi
+          limits:
+            memory: 1Gi
+        osd:
+          requests:
+            cpu: 50m
+            memory: 512Gi
+          limits:
+            memory: 2Gi
+        mgr-sidecar:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            memory: 256Mi
     cephBlockPools:
       - name: ceph-blockpool
         spec:
@@ -125,6 +150,12 @@ spec:
                     matchLabels:
                       app.kubernetes.io/name: ceph-mds
                       app.kubernetes.io/part-of: *cephFileSystemName
+            resources:
+              requests:
+                cpu: 50m
+                memory: 512Mi
+              limits:
+                memory: 1Gi
         storageClass:
           enabled: true
           isDefault: false
@@ -161,6 +192,12 @@ spec:
           preservePoolsOnDelete: true
           gateway:
             port: 80
+            resources:
+              requests:
+                cpu: 50m
+                memory: 512Mi
+              limits:
+                memory: 1Gi
             instances: 2
             priorityClassName: system-cluster-critical
           healthCheck:
