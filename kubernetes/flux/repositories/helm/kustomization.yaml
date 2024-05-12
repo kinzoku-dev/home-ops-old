@@ -20,3 +20,4 @@ resources:
   - ./stevehipwell.yaml
   - ./csi-driver-nfs.yaml
   - ./nextcloud.yaml
+  - ./tf-controller.yaml
