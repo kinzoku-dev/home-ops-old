@@ -78,5 +78,10 @@ spec:
               app.kubernetes.io/name: ingress-nginx
               app.kubernetes.io/instance: ingress-nginx-external
               app.kubernetes.io/component: controller
+      resources:
+        requests:
+          cpu: 100m
+        limits:
+          memory: 500Mi
     defaultBackend:
       enabled: false

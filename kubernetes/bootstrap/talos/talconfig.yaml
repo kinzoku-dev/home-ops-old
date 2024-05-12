@@ -70,6 +70,21 @@ nodes:
             gateway: "192.168.1.0"
         vip:
           ip: "192.168.3.20"
+  - hostname: "orion-04"
+    ipAddress: "192.168.3.24"
+    installDisk: "/dev/nvme0n1"
+    talosImageURL: factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "2c:f0:5d:b3:a9:9b"
+        dhcp: false
+        addresses:
+          - "192.168.3.24/17"
+        mtu: 1500
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.1.0"
 
 patches:
   # Configure containerd

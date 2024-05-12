@@ -1,3 +1,3 @@
 ---
-providerRegex: ^(orion-01|orion-02|orion-03)$
+providerRegex: ^(orion-01|orion-02|orion-03|orion-04)$
 bypassDnsResolution: true
