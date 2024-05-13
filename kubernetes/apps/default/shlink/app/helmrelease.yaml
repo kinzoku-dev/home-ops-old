@@ -43,6 +43,7 @@ spec:
             env:
               DEFAULT_DOMAIN: "l.the-nebula.xyz"
               IS_HTTPS_ENABLED: true
+              SHELL_VERBOSITY: 3
             envFrom:
               - secretRef:
                   name: shlink-secret
