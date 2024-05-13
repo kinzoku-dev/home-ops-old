@@ -7,3 +7,4 @@ resources:
   - ./smtp-relay/ks.yaml
   - ./authelia/ks.yaml
   - ./tf-controller/ks.yaml
+  - ./shlink/ks.yaml
