@@ -3,15 +3,11 @@
 authentication_backend:
   ldap:
     address: ldap://glauth.default.svc.cluster.local:389
-    implementation: custom
+    implementation: glauth
     timeout: 5s
     start_tls: false
     base_dn: dc=the-nebula,dc=xyz
-    additional_users_dn: ou=people,ou=users
-    users_filter: (&({username_attribute}={input})(objectClass=posixAccount))
-    additional_groups_dn: ou=users
-    groups_filter: (&(uniqueMember={dn})(objectClass=posixGroup))
-    user: cn=search,ou=svcaccts,ou=users,dc=the-nebula,dc=xyz
+    user: cn=search,dc=the-nebula,dc=xyz
     password: "$${AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD}"
     attributes:
       username: uid
@@ -41,7 +37,7 @@ notifier:
   disable_startup_check: true
   smtp:
     address: smtp-relay.default.svc.cluster.local:25
-    sender: Authelia <authelia@the-nebula.xyz>
+    sender: Authelia <authelia@hamza.casa>
     disable_require_tls: true
 
 totp:
