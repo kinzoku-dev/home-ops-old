@@ -1,0 +1,86 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: &app nullpointer
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      nullpointer:
+        replicas: 1
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+            envFrom: &envFrom
+              - secretRef:
+                  name: 0x0-secret
+        containers:
+          app:
+            image:
+              repository: lastradev/0x0
+              tag: latest
+            env:
+              FLASK_APP: fhost
+              APP_PORT: 8080
+              MAX_SIZE: 512
+            envFrom:
+              - secretRef:
+                  name: 0x0-secret
+          nginx:
+            image:
+              repository: lastradev/0x0-nginx
+              tag: latest
+            env:
+              MAX_SIZE: 512M
+            dependsOn:
+              - app
+    service:
+      app:
+        controller: nullpointer
+        ports:
+          http:
+            port: 80
+    ingress:
+      app:
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: external.the-nebula.xyz
+        hosts:
+          - host: "0x0.the-nebula.xyz"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      data:
+        existingClaim: nullpointer
+        advancedMounts:
+          nullpointer:
+            app:
+              - path: /app/up
+            nginx:
+              - path: /etc/nginx/html/up

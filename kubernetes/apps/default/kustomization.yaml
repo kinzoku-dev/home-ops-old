@@ -9,3 +9,4 @@ resources:
   - ./tf-controller/ks.yaml
   - ./shlink/ks.yaml
   - ./lldap/ks.yaml
+  - ./0x0/ks.yaml
