@@ -54,6 +54,16 @@ spec:
             enabled: true
             port: 3890
             protocol: TCP
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: "{{ .Release.Name }}.the-nebula.xyz"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
     persistence:
       data:
         existingClaim: lldap
