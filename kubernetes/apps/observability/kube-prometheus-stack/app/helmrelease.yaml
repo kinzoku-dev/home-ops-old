@@ -152,10 +152,6 @@ spec:
       enabled: true
     prometheus-node-exporter:
       fullnameOverride: node-exporter
-      podLabels:
-        jobLabel: node-exporter
-      service:
-        portName: http-metrics
       prometheus:
         monitor:
           enabled: true
@@ -177,8 +173,10 @@ spec:
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
+        scrapeConfigSelectorNilUsesHelmValues: false
         enableAdminAPI: true
         walCompression: true
+        scrapeInterval: 1m
         enableFeatures:
           - auto-gomemlimit
           - memory-snapshot-on-shutdown
