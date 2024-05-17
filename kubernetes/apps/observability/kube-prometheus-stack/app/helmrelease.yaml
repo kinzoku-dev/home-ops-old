@@ -42,8 +42,9 @@ spec:
         ingressClassName: internal
         hosts: ["alertmanager.the-nebula.xyz"]
       alertmanagerSpec:
-        replicas: 3
-        useExistingSecret: false
+        replicas: 2
+        useExistingSecret: true
+        configSecret: alertmanager-secret
         storage:
           volumeClaimTemplate:
             spec:
