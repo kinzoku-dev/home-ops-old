@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "kinzoku-production"
+spec:
+  secretName: "kinzoku-production-tls"
+  issuerRef:
+    name: letsencrypt-production-kinzoku
+    kind: ClusterIssuer
+  commonName: "kinzoku.xyz"
+  dnsNames:
+    - "kinzoku.xyz"
+    - "*.kinzoku.xyz"

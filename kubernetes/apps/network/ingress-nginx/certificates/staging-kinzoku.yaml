@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "kinzoku-staging"
+spec:
+  secretName: "kinzoku-staging-tls"
+  issuerRef:
+    name: letsencrypt-staging-kinzoku
+    kind: ClusterIssuer
+  commonName: "kinzoku.xyz"
+  dnsNames:
+    - "kinzoku.xyz"
+    - "*.kinzoku.xyz"

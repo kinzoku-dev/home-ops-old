@@ -1,3 +1,4 @@
+---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
@@ -37,3 +38,43 @@ spec:
         selector:
           dnsZones:
             - "${SECRET_DOMAIN}"
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-production-kinzoku
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: "${SECRET_ACME_EMAIL}"
+    privateKeySecretRef:
+      name: letsencrypt-production-kinzoku
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cert-manager-secret
+              key: api-token
+        selector:
+          dnsZones:
+            - "kinzoku.xyz"
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging-kinzoku
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: "${SECRET_ACME_EMAIL}"
+    privateKeySecretRef:
+      name: letsencrypt-staging-kinzoku
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cert-manager-secret
+              key: api-token
+        selector:
+          dnsZones:
+            - "kinzoku.xyz"
