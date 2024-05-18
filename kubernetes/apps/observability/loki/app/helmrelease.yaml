@@ -113,17 +113,11 @@ spec:
       ingress:
         enabled: true
         ingressClassName: internal
-        annotations:
-          cert-manager.io/issuer: "letsencrypt-production"
         hosts:
           - host: loki.the-nebula.xyz
             paths:
               - path: /
                 pathType: Prefix
-        tls:
-          - secretName: "the-nebula-xyz-production"
-            hosts:
-              - loki.the-nebula.xyz
     read:
       replicas: 2
     write:
