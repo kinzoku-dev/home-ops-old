@@ -17,6 +17,7 @@ resources:
   - ./prometheus-community.yaml
   - ./rook-ceph.yaml
   - ./cloudnative-pg.yaml
+  - ./grafana.yaml
   - ./stevehipwell.yaml
   - ./csi-driver-nfs.yaml
   - ./nextcloud.yaml

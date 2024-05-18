@@ -55,26 +55,12 @@ spec:
                 requests:
                   storage: 1Gi
     grafana:
-      enabled: true
-      fullnameOverride: grafana
-      forceDeployDatasources: false
-      forceDeployDashboards: false
-      defaultDashboardsEnabled: true
-      defaultDashboardsTimezone: utc
-      serviceMonitor:
-        enabled: true
-      admin:
-        existingSecret: prometheus-secrets
-        userKey: GRAFANA_ADMIN_USER
-        passwordKey: GRAFANA_ADMIN_PASSWORD
-      ingress:
-        enabled: true
-        ingressClassName: external
-        annotations:
-          external-dns.alpha.kubernetes.io/target: external.the-nebula.xyz
-        hosts:
-          - grafana.the-nebula.xyz
-        path: /
+      enabled: false
+      forceDeployDashboards: true
+      sidecar:
+        dashboards:
+          annotations:
+            grafana_folder: Kubernetes
     kubeApiServer:
       enabled: true
       serviceMonitor:
