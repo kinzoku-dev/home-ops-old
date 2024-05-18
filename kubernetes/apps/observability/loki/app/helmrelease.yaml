@@ -121,7 +121,7 @@ spec:
               - path: /
                 pathType: Prefix
         tls:
-          - secretName: "the-nebula-xyz-production-tls"
+          - secretName: "the-nebula-xyz-production"
             hosts:
               - loki.the-nebula.xyz
     read:
