@@ -10,3 +10,4 @@ resources:
   - ./shlink/ks.yaml
   - ./lldap/ks.yaml
   - ./0x0/ks.yaml
+  - ./nextcloud/ks.yaml
