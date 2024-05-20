@@ -22,3 +22,5 @@ resources:
   - ./csi-driver-nfs.yaml
   - ./nextcloud.yaml
   - ./tf-controller.yaml
+  - ./piraeus.yaml
+  - ./backube.yaml
