@@ -10,3 +10,4 @@ resources:
   - ./grafana/ks.yaml
   - ./vector/ks.yaml
   - ./loki/ks.yaml
+  - ./homepage/ks.yaml
