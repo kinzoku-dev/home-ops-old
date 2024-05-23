@@ -64,7 +64,6 @@ spec:
     query:
       replicas: 2
       extraArgs: ["--alert.query-url=https://thanos.the-nebula.xyz"]
-      additionalStores: ["thanos.kinzoku.xyz:10901"]
     queryFrontend:
       enabled: true
       replicas: 2
