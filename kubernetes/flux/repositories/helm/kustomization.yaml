@@ -25,3 +25,5 @@ resources:
   - ./piraeus.yaml
   - ./backube.yaml
   - ./jameswynn.yaml
+  - ./bryopsida.yaml
+  - ./k8s-at-home.yaml
