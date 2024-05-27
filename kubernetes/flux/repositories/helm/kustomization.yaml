@@ -27,3 +27,4 @@ resources:
   - ./jameswynn.yaml
   - ./bryopsida.yaml
   - ./k8s-at-home.yaml
+  - ./twingate.yaml

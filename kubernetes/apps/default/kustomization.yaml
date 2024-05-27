@@ -10,3 +10,4 @@ resources:
   - ./shlink/ks.yaml
   - ./0x0/ks.yaml
   - ./glauth/ks.yaml
+  - ./twingate/ks.yaml
