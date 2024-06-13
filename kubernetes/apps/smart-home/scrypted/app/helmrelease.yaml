@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: koush/scrypted
-      tag: v0.105.0-jammy-lite
+      tag: v0.111.0-jammy-lite
     env:
       TZ: "${TIMEZONE}"
     service:
